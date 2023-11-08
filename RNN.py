@@ -73,6 +73,10 @@ def main():
         for X_train_subbatch, Y_train_subbatch in zip(X_train_batch, Y_train_batch):
             output, _ = model(X_train_subbatch)
             optimizer.zero_grad()
+
+            #Resize Y_train_subbatch
+            Y_train_subbatch = Y_train_subbatch.expand(batchsize, 44, 13)
+
             print(f'X_train_subbatch = {X_train_subbatch.shape}')
             print(f'output shape = {len(output)}')
             print(f'Y_train_subbatch = {Y_train_subbatch}')
@@ -85,3 +89,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# output shape = (1, 44, 13)
